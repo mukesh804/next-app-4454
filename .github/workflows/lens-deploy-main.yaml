@@ -146,6 +146,8 @@ jobs:
             kubectl apply -f ${GITHUB_WORKSPACE}/.github/workflows/cloudzilla/main/k8s/ingress-upstream.yaml || return 1
             envsubst '$FULL_IMAGE_WITH_TAG $POD_NAME' < ${GITHUB_WORKSPACE}/.github/workflows/cloudzilla/main/k8s/deploy.yaml | kubectl apply -f - || return 1
             kubectl rollout restart deployment "section-project-deployment" || return 1
+            kubectl get deployment || return 1
+            kubectl get pod,svc,ingress || return 1
            
           }
 
